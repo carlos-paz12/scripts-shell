@@ -1,5 +1,34 @@
 #!/bin/bash
 clear
+
+print() {
+  echo -e "| \e[32m$1 $op $2 = $res\e[0m\n"
+}
+
+add() {
+  op="+"
+  res=$(( $1 + $2 ))
+  print $1 $2 $op $res
+}
+
+sub() {
+  op="-"
+  res=$(( $1 - $2 ))
+  print $1 $2 $op $res
+}
+
+mul() {
+  op="*"
+  res=$(( $1 * $2 ))
+  print $1 $2 $op $res
+}
+
+div() {
+  op="/"
+  res=$(( $1 / $2 ))
+  print $1 $2 $op $res
+}
+
 while [ -e $0 ];
 do
   echo "|-----------------------------------|"
@@ -40,13 +69,13 @@ do
   case $op in
     "1")
       echo -e "\n\n| \e[1mResult:\e[0m" 
-      echo -e "| \e[32m$x + $y = $(($x + $y))\e[0m\n\n" ;;
+      add $x $y ;;
     "2")
       echo -e "\n\n| \e[1mResult:\e[0m" 
-      echo -e "| \e[32m$x - $y = $(($x - $y))\e[0m\n\n" ;;
+      sub $x $y ;;
     "3")
       echo -e "\n\n| \e[1mResult:\e[0m" 
-      echo -e "| \e[32m$x * $y = $(($x * $y))\e[0m\n\n" ;;
+      mul $x $y ;;
     *)
       if [ $y -eq 0 ];
       then
@@ -55,7 +84,7 @@ do
         continue
       else
         echo -e "\n\n| \e[1mResult:\e[0m" 
-        echo -e "| \e[32m$x / $y = $(($x / $y))\e[0m\n\n"
+        div $x $y
       fi ;;
   esac
 done
